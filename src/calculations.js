@@ -2,11 +2,6 @@
  * Created by Brandon on 7/3/2017.
  */
 
-
-// Weight the score
-//average item (array of weighted scores, label)
-//sort by traveledWith and average the general score of each item with the traveled with.
-
 class calculations{
     weightedAverage(reviewArray){
         let weightedTotal = reviewArray.reduce(function(weightObject, reviewInfo){
@@ -29,6 +24,7 @@ class calculations{
         return weightedTotal.totalValue/weightedTotal.totalWeight;
     };
 
+    //This is a dumb average (sum/totalNumber) that I put in there to check the sanity of my weighted averages.
     dumbAverage(generalReviewArray){
         let total = generalReviewArray.reduce(function(total, reviewInfo){
             return total + reviewInfo.reviewValue;

@@ -2,7 +2,7 @@
  * Created by Brandon on 7/3/2017.
  */
 let Calculations = require('./calculations');
-let calulator = new Calculations.calculations();
+let calculator = new Calculations.calculations();
 class reviewList {
     constructor(pathToData){
         //import the data
@@ -20,8 +20,8 @@ class reviewList {
         let generalRatingsArray = this.data.map(function(review){
             return {reviewDate: review.entryDate, reviewValue: review.ratings.general.general};
         });
-        //return this.weightedGeneralAverage = calulator.GeneralReviewAverage(generalRatingsArray);
-        return calulator.weightedAverage(generalRatingsArray);
+        //return this.weightedGeneralAverage = calculator.GeneralReviewAverage(generalRatingsArray);
+        return calculator.weightedAverage(generalRatingsArray);
     }
     aspectReviewAverage(){
         let arrayMapList = {};
@@ -31,7 +31,7 @@ class reviewList {
             let map = this.data.map(function(review){
                 return {reviewDate: review.entryDate, reviewValue:review.ratings.aspects[key]};
             });
-            arrayMapList[key] = calulator.weightedAverage(map);
+            arrayMapList[key] = calculator.weightedAverage(map);
         }, this);
 
 
@@ -48,7 +48,7 @@ class reviewList {
             let map = tempData.map(function(review){
                 return {reviewDate: review.entryDate, reviewValue:review.ratings.general.general};
             });
-            arrayMapList[key] = calulator.weightedAverage(map);
+            arrayMapList[key] = calculator.weightedAverage(map);
         }, this);
 
 

@@ -11,5 +11,8 @@
   "dependencies": {
     "cors": "^2.8.3",
     "express": "^4.15.3"
+  },
+  "devDependencies": {
+    "mocha": "^3.4.2"
   }
 }
