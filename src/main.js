@@ -13,9 +13,6 @@ let ReviewList = require('./reviewList')
 
 let reviews = new ReviewList.reviewList('../data/reviews.json');
 
-
-
-
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 // app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,18 +31,34 @@ router.get('/test', function(req, res) {
     res.json({"result":true});
 });
 
-router.get('/api/getReviews', function(req, res){
+router.get('/getReviews', function(req, res){
     res.json(reviews.getData());
 });
-router.get('/api/getReviewByTraveledWith', function(req, res){
-    let filteredReviews = reviews.getDataByTraveledWith('FAMILY')
-    console.log("total number of filtered reviews", filteredReviews.length)
+
+router.get('/generalReviewAverage', function (req, res) {
+    let weightedAverage = reviews.generalReviewAverage();
+    res.json({"result":weightedAverage});
+});
+
+router.get('/aspectReviewAverage', function(req, res){
+    let aspectReviewAverage = reviews.aspectReviewAverage();
+    res.json({"result":aspectReviewAverage});
+});
+
+router.get('/traveledWithAverage', function(req, res){
+    let traveledWithAverage = reviews.travelWithReviewAverage();
+    res.json({'result':traveledWithAverage});
+});
+
+router.get('/getAverageByTraveledWith', function(req, res){
+    let filteredReviews = reviews.getDataByTraveledWith('FAMILY');
+    console.log("total number of filtered reviews", filteredReviews.length);
     res.json(filteredReviews);
-})
+});
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
-app.use('/', router);
+app.use('/api', router);
 
 // START THE SERVER
 // =============================================================================
