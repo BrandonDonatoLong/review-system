@@ -1,0 +1,14 @@
+{
+  "name": "reviewSystem",
+  "version": "0.0.1",
+  "author": "Brandon Donato-Long",
+  "license": "MIT",
+  "description": "This is a project for a review system with a backend of node/express and a frontend using react.",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.3",
+    "express": "^4.15.3"
+  }
+}
