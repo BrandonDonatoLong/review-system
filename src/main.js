@@ -9,6 +9,12 @@ const cors = require('cors');
 let app = express();                 // define our app using express
 //var bodyParser = require('body-parser');
 
+let ReviewList = require('./reviewList')
+
+let reviews = new ReviewList.reviewList('../data/reviews.json');
+
+
+
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -28,6 +34,14 @@ router.get('/test', function(req, res) {
     res.json({"result":true});
 });
 
+router.get('/api/getReviews', function(req, res){
+    res.json(reviews.getData());
+});
+router.get('/api/getReviewByTraveledWith', function(req, res){
+    let filteredReviews = reviews.getDataByTraveledWith('FAMILY')
+    console.log("total number of filtered reviews", filteredReviews.length)
+    res.json(filteredReviews);
+})
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
