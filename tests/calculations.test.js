@@ -1,7 +1,7 @@
 let mocha = require('mocha');
 let assert = require('assert');
 
-describe('test the weighted average of a set of reviews', function(){
+describe('test the functions of the calculator classes', function(){
     it('setup the calculator', function(){
         let calculations = require('../src/calculations');
         let calculator = new calculations.calculations();

@@ -51,7 +51,8 @@ router.get('/traveledWithAverage', function(req, res){
 });
 
 router.get('/getAverageByTraveledWith', function(req, res){
-    let filteredReviews = reviews.getDataByTraveledWith('FAMILY');
+
+    let filteredReviews = reviews.getDataByTraveledWith(res.query.traveledWith.toUpperCase());
     console.log("total number of filtered reviews", filteredReviews.length);
     res.json(filteredReviews);
 });
