@@ -31,6 +31,9 @@ router.get('/test', function(req, res) {
     res.json({"result":true});
 });
 
+// todo implement sorts on the server: sort by travel date and review date (ascending, descending) (not optional)
+// todo implement a Most recent (review date descending trimmed to 3-5 reviews), (3-5) Most Positive, (3-5)most negative (all of these are optional.
+
 router.get('/getReviews', function(req, res){
     res.json(reviews.getData());
 });
