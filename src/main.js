@@ -31,21 +31,33 @@ router.get('/test', function(req, res) {
     res.json({"result":true});
 });
 
-// todo implement sorts on the server: sort by travel date and review date (ascending, descending) (not optional)
+// todo implement sorts on the server: sort by travel date and review date (not optional)
 // todo implement a Most recent (review date descending trimmed to 3-5 reviews), (3-5) Most Positive, (3-5)most negative (all of these are optional.
+
+router.get('/reviewsByTravelDate', function (req, res) {
+    let sortedReviews = reviews.sortByTravelDate();
+    res.json(sortedReviews)
+});
+
+router.get('/reviewsByContributionDate', function (req, res) {
+    let sortedReviews = reviews.sortByContributionDate();
+    res.json(sortedReviews)
+});
+
+router.get('/reviewsByTraveledWith', function(req, res){
+    let filteredReviews = reviews.getDataByTraveledWith(req.query.traveledWith.toUpperCase());
+    console.log("total number of filtered reviews", filteredReviews.length);
+    res.json(filteredReviews);
+});
 
 router.get('/getReviews', function(req, res){
     res.json(reviews.getData());
 });
 
-router.get('/generalReviewAverage', function (req, res) {
-    let weightedAverage = reviews.generalReviewAverage();
-    res.json({"result":weightedAverage});
-});
-
-router.get('/aspectReviewAverage', function(req, res){
+router.get('/reviewAverage', function(req, res){
     let aspectReviewAverage = reviews.aspectReviewAverage();
-    res.json({"result":aspectReviewAverage});
+    let weightedAverage = reviews.generalReviewAverage();
+    res.json({"result":aspectReviewAverage, "general":weightedAverage});
 });
 
 router.get('/traveledWithAverage', function(req, res){
@@ -53,8 +65,7 @@ router.get('/traveledWithAverage', function(req, res){
     res.json({'result':traveledWithAverage});
 });
 
-router.get('/getAverageByTraveledWith', function(req, res){
-
+router.get('/getReviewByTraveledWith', function(req, res){
     let filteredReviews = reviews.getDataByTraveledWith(res.query.traveledWith.toUpperCase());
     console.log("total number of filtered reviews", filteredReviews.length);
     res.json(filteredReviews);

@@ -16,6 +16,22 @@ class reviewList {
         }, this);
     };
 
+    sortByTravelDate(){
+        let reviews = this.data;
+        reviews.sort(function (left, right) {
+            return right.travelDate - left.travelDate;
+        });
+        return reviews;
+    }
+
+    sortByContributionDate(){
+        let reviews = this.data;
+        reviews.sort(function (left, right) {
+            return right.entryDate - left.entryDate;
+        });
+        return reviews;
+    }
+
     generalReviewAverage(){
         let generalRatingsArray = this.data.map(function(review){
             return {reviewDate: review.entryDate, reviewValue: review.ratings.general.general};
