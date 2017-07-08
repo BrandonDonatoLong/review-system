@@ -21,7 +21,7 @@ class calculations{
             return weightObject;
         }, {totalValue:0, totalWeight:0});
 
-        return (weightedTotal.totalValue/weightedTotal.totalWeight).toPrecision(3);
+        return (weightedTotal.totalValue/weightedTotal.totalWeight).toPrecision(2);
     };
 
     //This is a dumb average (sum/totalNumber) that I put in there to check the sanity of my weighted averages.

@@ -36,28 +36,28 @@ router.get('/test', function(req, res) {
 
 router.get('/reviewsByTravelDate', function (req, res) {
     let sortedReviews = reviews.sortByTravelDate();
-    res.json(sortedReviews)
+    res.json({reviews:sortedReviews});
 });
 
 router.get('/reviewsByContributionDate', function (req, res) {
     let sortedReviews = reviews.sortByContributionDate();
-    res.json(sortedReviews)
+    res.json({reviews:sortedReviews})
 });
 
 router.get('/reviewsByTraveledWith', function(req, res){
     let filteredReviews = reviews.getDataByTraveledWith(req.query.traveledWith.toUpperCase());
     console.log("total number of filtered reviews", filteredReviews.length);
-    res.json(filteredReviews);
+    res.json({reviews:filteredReviews});
 });
 
 router.get('/getReviews', function(req, res){
-    res.json(reviews.getData());
+    res.json({reviews:reviews.getData()});
 });
 
 router.get('/reviewAverage', function(req, res){
     let aspectReviewAverage = reviews.aspectReviewAverage();
-    let weightedAverage = reviews.generalReviewAverage();
-    res.json({"result":aspectReviewAverage, "general":weightedAverage});
+    let general = {general:reviews.generalReviewAverage()};
+    res.json({"aspects":aspectReviewAverage, "general":general});
 });
 
 router.get('/traveledWithAverage', function(req, res){

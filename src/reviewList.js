@@ -17,7 +17,7 @@ class reviewList {
     };
 
     sortByTravelDate(){
-        let reviews = this.data;
+        let reviews = this.data.slice(0);
         reviews.sort(function (left, right) {
             return right.travelDate - left.travelDate;
         });
@@ -25,7 +25,7 @@ class reviewList {
     }
 
     sortByContributionDate(){
-        let reviews = this.data;
+        let reviews = this.data.slice(0);
         reviews.sort(function (left, right) {
             return right.entryDate - left.entryDate;
         });
@@ -59,12 +59,22 @@ class reviewList {
         this.travelWithValues.forEach(function(key){
             let tempData = this.getDataByTraveledWith(key);
             if (!arrayMapList[key]) {
-                arrayMapList[key] = {};
+                arrayMapList[key] = {aspects:{},
+                    general:{}
+                };
             }
             let map = tempData.map(function(review){
                 return {reviewDate: review.entryDate, reviewValue:review.ratings.general.general};
             });
-            arrayMapList[key] = calculator.weightedAverage(map);
+            arrayMapList[key].general.general = calculator.weightedAverage(map);
+
+            Object.keys(this.data[0].ratings.aspects).forEach(function(aspectKey){
+                arrayMapList[key].aspects[aspectKey] = {};
+                let map = tempData.map(function(review){
+                    return {reviewDate: review.entryDate, reviewValue:review.ratings.aspects[aspectKey]};
+                });
+                arrayMapList[key].aspects[aspectKey] = calculator.weightedAverage(map);
+            }, this);
         }, this);
 
 
