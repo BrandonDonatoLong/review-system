@@ -23,7 +23,7 @@ describe('test the functions of the calculator classes', function(){
 
         let calculatedWeightedAverage = calculator.weightedAverage(testData);
 
-        let controlWeightedSum = (10*0.5) + (9 * (1 - (2017-2012)*0.1)) + 8 * (1 - (2017-2013)* 0.1) + 7 * (1 - (2017-2014)* 0.1)+ 6 * (1 - (2017-2015)* 0.1) + 5 * (1 - (2017-2016)* 0.1) + + 4 * (1 - (2017-2017)* 0.1)
+        let controlWeightedSum = (10*0.5) + (9 * (1 - (2017-2012)*0.1)) + 8 * (1 - (2017-2013)* 0.1) + 7 * (1 - (2017-2014)* 0.1)+ 6 * (1 - (2017-2015)* 0.1) + 5 * (1 - (2017-2016)* 0.1) + + 4 * (1 - (2017-2017)* 0.1);
         let controlWeightsSum = 0.5 + 0.5 + (1 - (2017-2013)* 0.1)+ (1 - (2017-2014)* 0.1)+ (1 - (2017-2015)* 0.1)+ (1 - (2017-2016)* 0.1)+ (1 - (2017-2017)* 0.1);
         let controlWeightedAverage = controlWeightedSum / controlWeightsSum;
 

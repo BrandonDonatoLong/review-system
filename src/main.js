@@ -7,9 +7,8 @@
 const express = require('express');        // call express
 const cors = require('cors');
 let app = express();                 // define our app using express
-//var bodyParser = require('body-parser');
 
-let ReviewList = require('./reviewList')
+let ReviewList = require('./reviewList');
 
 let reviews = new ReviewList('../data/reviews.json');
 
