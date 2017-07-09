@@ -325,7 +325,8 @@ Result:
      "general": {
          "general": "8.5"
      }
- }```
+ }
+ ```
 
 ## Get traveledWithAverage
 
@@ -492,5 +493,6 @@ Result:
              }
          }
      }
- }```
+ }
+ ```
 
