@@ -46,7 +46,6 @@ router.get('/reviewsByContributionDate', function (req, res) {
 
 router.get('/reviewsByTraveledWith', function(req, res){
     let filteredReviews = reviews.getDataByTraveledWith(req.query.traveledWith.toUpperCase());
-    console.log("total number of filtered reviews", filteredReviews.length);
     res.json({reviews:filteredReviews});
 });
 
@@ -67,7 +66,6 @@ router.get('/traveledWithAverage', function(req, res){
 
 router.get('/getReviewByTraveledWith', function(req, res){
     let filteredReviews = reviews.getDataByTraveledWith(res.query.traveledWith.toUpperCase());
-    console.log("total number of filtered reviews", filteredReviews.length);
     res.json(filteredReviews);
 });
 
@@ -78,5 +76,5 @@ app.use('/api', router);
 // START THE SERVER
 // =============================================================================
 app.listen(port);
-console.log('Magic happens on port ' + port);
+console.log('port ' + port + ' is open for business');
 //Here create a REST Api to use.

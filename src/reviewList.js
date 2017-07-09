@@ -80,7 +80,8 @@ class reviewList {
             }, this);
         }, this);
 
-
+        //this is needed to restore the filtered list because "this.getDataByTravledWith" Changes the filtered list to the last one that was sent.
+        this.getData();
         return arrayMapList;
     }
 
