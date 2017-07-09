@@ -3,15 +3,14 @@ let assert = require('assert');
 
 describe('test the functions of the calculator classes', function(){
     it('setup the calculator', function(){
-        let calculations = require('../src/calculations');
-        let calculator = new calculations.calculations();
+        let calculator = require('../src/calculations');
+
 
         assert.equal(typeof calculator.weightedAverage ==='function', true);
         assert.equal(typeof calculator.dumbAverage ==='function', true);
     });
     it('run a weighted Average Review', function () {
-        let calculations = require('../src/calculations');
-        let calculator = new calculations.calculations();
+        let calculator = require('../src/calculations');
         let testData = [
             { reviewDate: new Date(2009,1,1,1,1), reviewValue:10 },
             { reviewDate: new Date(2012,1,1,1,1), reviewValue:9 },
@@ -32,8 +31,7 @@ describe('test the functions of the calculator classes', function(){
     });
 
     it('run a dumb average review', function () {
-        let calculations = require('../src/calculations');
-        let calculator = new calculations.calculations();
+        let calculator = require('../src/calculations');
         let testData = [
             { reviewDate: new Date(2009,1,1,1,1), reviewValue:10 },
             { reviewDate: new Date(2012,1,1,1,1), reviewValue:9 },

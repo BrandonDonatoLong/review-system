@@ -4,7 +4,7 @@ let assert = require('assert');
 describe('test the functions of the reviewList class', function() {
     it('setup the reviewList', function () {
         let reviewList = require('../src/reviewList');
-        let reviews = new reviewList.reviewList('../data/reviews.json');
+        let reviews = new reviewList('../data/reviews.json');
         //assert some things I am aware of from looking at the json data.
         assert.equal(Array.isArray(reviews.baseData), true);
         assert.equal(Array.isArray(reviews.travelWithValues),true);
@@ -16,18 +16,17 @@ describe('test the functions of the reviewList class', function() {
         assert.equal(typeof reviews.travelWithReviewAverage === 'function', true);
         assert.equal(typeof reviews.getDataByTraveledWith === 'function', true);
         assert.equal(typeof reviews.getData === 'function', true);
-        assert.equal(typeof reviews.getReviewById === 'function', true);
     });
 
     it('getData', function(){
         let reviewList = require('../src/reviewList');
-        let reviews = new reviewList.reviewList('../data/reviews.json');
+        let reviews = new reviewList('../data/reviews.json');
 
         assert.equal(reviews.getData().length, 200);
     });
     it('getDataTravelWith', function(){
         let reviewList = require('../src/reviewList');
-        let reviews = new reviewList.reviewList('../data/reviews.json');
+        let reviews = new reviewList('../data/reviews.json');
 
         assert.equal(reviews.getDataByTraveledWith('SINGLE').length, 1);
         assert.equal(reviews.getDataByTraveledWith('COUPLE').length, 16);
@@ -38,7 +37,7 @@ describe('test the functions of the reviewList class', function() {
 
     it('travelWithReviewAverage', function(){
         let reviewList = require('../src/reviewList');
-        let reviews = new reviewList.reviewList('../data/reviews.json');
+        let reviews = new reviewList('../data/reviews.json');
 
         assert.deepEqual(reviews.travelWithReviewAverage(), {
             "COUPLE": {
