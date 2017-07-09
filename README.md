@@ -37,7 +37,7 @@ Path: /api/reviewsByTravelDate
 Query string: None
 
 Result:
-`{
+```{
       "reviews": [
           {
               "parents": [
@@ -91,7 +91,8 @@ Result:
           },
           ...
           ]
- }`
+ }
+```
 ## Get reviewsByContributionDate
 
 Path: /api/reviewsByContributionDate
@@ -99,7 +100,7 @@ Path: /api/reviewsByContributionDate
 Query string: None
 
 Result:
-`{
+```{
      "reviews": [
          {
              "parents": [
@@ -153,7 +154,8 @@ Result:
          },
          ...
          ]
-    }`
+    }
+```
     
 ## Get reviewsByTraveledWith
 
@@ -166,7 +168,7 @@ Query string:
 Sort By Value should be either "EntryDate" or "TravelDate" no other sorts supported at this time.
 
 Result:
-`{
+```{
      "reviews": [
          {
              "parents": [
@@ -220,7 +222,8 @@ Result:
          },
          ...
          ]
-    }`
+    }
+```
     
 ## Get getReviews
 
@@ -232,7 +235,7 @@ Query string:
 Sort By Value should be either "EntryDate" or "TravelDate" no other sorts supported at this time.
 
 Result:
-`{
+```{
      "reviews": [
          {
              "parents": [
@@ -286,7 +289,8 @@ Result:
          },
          ...
          ]
-    }`
+    }
+```
     
 ## Get reviewAverage
 
