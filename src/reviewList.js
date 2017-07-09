@@ -6,10 +6,11 @@ let calculator = new Calculations.calculations();
 class reviewList {
     constructor(pathToData){
         //import the data
-        this.data = require(pathToData);
+        this.baseData = require(pathToData);
         //helper setup to get the TraveledWith values for data I don't know.
+        this.filteredData = this.baseData.slice(0);
         this.travelWithValues = [];
-        this.data.forEach(function(review){
+        this.baseData.forEach(function(review){
             if (this.travelWithValues.indexOf(review.traveledWith) < 0){
                 this.travelWithValues.push(review.traveledWith);
             }
@@ -17,23 +18,25 @@ class reviewList {
     };
 
     sortByTravelDate(){
-        let reviews = this.data.slice(0);
-        reviews.sort(function (left, right) {
-            return right.travelDate - left.travelDate;
+        this.filteredData.sort(function (a, b) {
+            a = new Date(a.travelDate);
+            b = new Date(b.travelDate);
+            return a>b ? -1 : a<b ? 1 : 0;
         });
-        return reviews;
+        return this.filteredData;
     }
 
     sortByContributionDate(){
-        let reviews = this.data.slice(0);
-        reviews.sort(function (left, right) {
-            return right.entryDate - left.entryDate;
+        this.filteredData.sort(function (a, b) {
+            a = new Date(a.entryDate);
+            b = new Date(b.entryDate);
+            return a>b ? -1 : a<b ? 1 : 0;
         });
-        return reviews;
+        return this.filteredData;
     }
 
     generalReviewAverage(){
-        let generalRatingsArray = this.data.map(function(review){
+        let generalRatingsArray = this.baseData.map(function(review){
             return {reviewDate: review.entryDate, reviewValue: review.ratings.general.general};
         });
         //return this.weightedGeneralAverage = calculator.GeneralReviewAverage(generalRatingsArray);
@@ -41,10 +44,10 @@ class reviewList {
     }
     aspectReviewAverage(){
         let arrayMapList = {};
-        let aspectKeys = Object.keys(this.data[0].ratings.aspects);
+        let aspectKeys = Object.keys(this.baseData[0].ratings.aspects);
         aspectKeys.forEach(function(key){
             arrayMapList[key] = {};
-            let map = this.data.map(function(review){
+            let map = this.baseData.map(function(review){
                 return {reviewDate: review.entryDate, reviewValue:review.ratings.aspects[key]};
             });
             arrayMapList[key] = calculator.weightedAverage(map);
@@ -68,7 +71,7 @@ class reviewList {
             });
             arrayMapList[key].general.general = calculator.weightedAverage(map);
 
-            Object.keys(this.data[0].ratings.aspects).forEach(function(aspectKey){
+            Object.keys(this.filteredData[0].ratings.aspects).forEach(function(aspectKey){
                 arrayMapList[key].aspects[aspectKey] = {};
                 let map = tempData.map(function(review){
                     return {reviewDate: review.entryDate, reviewValue:review.ratings.aspects[aspectKey]};
@@ -83,21 +86,23 @@ class reviewList {
 
     getDataByTraveledWith(traveledWith){
         //sort by traveled with
-        return this.data.filter(function(review){
+        this.filteredData = this.baseData.filter(function(review){
             return review.traveledWith === traveledWith;
-        });
+        }).slice(0);
+        return this.filteredData;
     };
 
     // By the fields I am assuming that this data was taken from a DB. I could reinsert the data into a new Mongoose DB but I would be worried it would then change some of the items.
     // So I will integrate some calls that could be easily replaced with a DB call.
     getReviewById(id){
-        return this.data.filter(function(review){
+        return this.baseData.filter(function(review){
             return review.id === id;
         })
     }
 
     getData(){
-        return this.data;
+        this.filteredData = this.baseData.slice(0);
+        return this.filteredData;
     }
 }
 
