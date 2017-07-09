@@ -46,11 +46,28 @@ router.get('/reviewsByContributionDate', function (req, res) {
 
 router.get('/reviewsByTraveledWith', function(req, res){
     let filteredReviews = reviews.getDataByTraveledWith(req.query.traveledWith.toUpperCase());
+    if (req.query.sortBy){
+        if (req.query.sortBy === 'TravelDate'){
+            filteredReviews = reviews.sortByTravelDate();
+        }
+        else {
+            filteredReviews = reviews.sortByContributionDate();
+        }
+    }
     res.json({reviews:filteredReviews});
 });
 
 router.get('/getReviews', function(req, res){
-    res.json({reviews:reviews.getData()});
+    let allReviews = reviews.getData();
+    if (req.query.sortBy){
+        if (req.query.sortBy === 'TravelDate'){
+            allReviews = reviews.sortByTravelDate();
+        }
+        else {
+            allReviews = reviews.sortByContributionDate();
+        }
+    }
+    res.json({reviews:allReviews});
 });
 
 router.get('/reviewAverage', function(req, res){
