@@ -3,7 +3,8 @@
  */
 
 class calculations{
-    weightedAverage(reviewArray){
+    // Function to run a weighted average of all the entries in the passed in array (already filtered and normalized)
+    static weightedAverage(reviewArray){
         let weightedTotal = reviewArray.reduce(function(weightObject, reviewInfo){
             let reviewDate = new Date(reviewInfo.reviewDate);
             let deltaYear = new Date().getFullYear()-reviewDate.getFullYear();
@@ -25,7 +26,7 @@ class calculations{
     };
 
     //This is a dumb average (sum/totalNumber) that I put in there to check the sanity of my weighted averages.
-    dumbAverage(generalReviewArray){
+    static dumbAverage(generalReviewArray){
         let total = generalReviewArray.reduce(function(total, reviewInfo){
             return total + reviewInfo.reviewValue;
         }, 0);
@@ -33,4 +34,4 @@ class calculations{
     }
 }
 
-module.exports.calculations = calculations;
+module.exports = calculations;

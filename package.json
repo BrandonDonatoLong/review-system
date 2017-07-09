@@ -6,7 +6,8 @@
   "description": "This is a project for a review system with a backend of node/express and a frontend using react.",
   "scripts": {
     "debug-start": "node %NODE_DEBUG_OPTION% src/main.js",
-    "start": "node src/main.js"
+    "start": "node src/main.js",
+    "test": "mocha tests"
   },
   "dependencies": {
     "cors": "^2.8.3",

@@ -1,9 +1,12 @@
 /**
  * Created by Brandon on 7/3/2017.
  */
-let Calculations = require('./calculations');
-let calculator = new Calculations.calculations();
+let calculator = require('./calculations');
+
+// This is a class that pulls in the data from a file and then does some operations on it. Such as sorting and
+// filtering the list.
 class reviewList {
+    //initialize the data.
     constructor(pathToData){
         //import the data
         this.baseData = require(pathToData);
@@ -16,7 +19,7 @@ class reviewList {
             }
         }, this);
     };
-
+    // Function to sort the working copy of the data by travel date
     sortByTravelDate(){
         this.filteredData.sort(function (a, b) {
             a = new Date(a.travelDate);
@@ -25,7 +28,7 @@ class reviewList {
         });
         return this.filteredData;
     }
-
+    // Function to sort the working copy of the data by entry date
     sortByContributionDate(){
         this.filteredData.sort(function (a, b) {
             a = new Date(a.entryDate);
@@ -34,14 +37,15 @@ class reviewList {
         });
         return this.filteredData;
     }
-
+    // Function to gather the weighted average of all the reviews "General" rating field
     generalReviewAverage(){
         let generalRatingsArray = this.baseData.map(function(review){
             return {reviewDate: review.entryDate, reviewValue: review.ratings.general.general};
         });
-        //return this.weightedGeneralAverage = calculator.GeneralReviewAverage(generalRatingsArray);
         return calculator.weightedAverage(generalRatingsArray);
     }
+    // Function to gather the weighted average of all the reviews aspects field with each aspect field needing their
+    // own weighted average calculation
     aspectReviewAverage(){
         let arrayMapList = {};
         let aspectKeys = Object.keys(this.baseData[0].ratings.aspects);
@@ -53,10 +57,9 @@ class reviewList {
             arrayMapList[key] = calculator.weightedAverage(map);
         }, this);
 
-
         return arrayMapList;
     }
-
+    // Similar to the above but done with the filtered data and not the base set of data.
     travelWithReviewAverage(){
         let arrayMapList = {};
         this.travelWithValues.forEach(function(key){
@@ -84,7 +87,7 @@ class reviewList {
         this.getData();
         return arrayMapList;
     }
-
+    // Function to filter the data set by who the reviewer traveled with.
     getDataByTraveledWith(traveledWith){
         //sort by traveled with
         this.filteredData = this.baseData.filter(function(review){
@@ -92,19 +95,11 @@ class reviewList {
         }).slice(0);
         return this.filteredData;
     };
-
-    // By the fields I am assuming that this data was taken from a DB. I could reinsert the data into a new Mongoose DB but I would be worried it would then change some of the items.
-    // So I will integrate some calls that could be easily replaced with a DB call.
-    getReviewById(id){
-        return this.baseData.filter(function(review){
-            return review.id === id;
-        })
-    }
-
+    // Function to restore the working copy of the data to the base copy of the data. (like selecting "All" on a filter option.
     getData(){
         this.filteredData = this.baseData.slice(0);
         return this.filteredData;
     }
 }
 
-module.exports.reviewList = reviewList;
+module.exports = reviewList;
